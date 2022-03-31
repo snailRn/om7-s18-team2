@@ -20,7 +20,7 @@
       </nav>
     </div>
 
-        <p>List of users who doesn't hand over books on time</p>
+        <p>List of all book</p>
 
 
 </body>
@@ -29,9 +29,9 @@
 {% block content %}
 {% if context %}
     {% for el in context %}
-        <option value="" > {{el.id}} {{el.user}} {{el.book}} {{el.created_at}} {{el.end_at}} {{el.plated_end_at}}</option>
+        <option value="" > {{el.id}} {{el.name}} {{el.description}} {{el.count}} {{el.authors}} </option>
     {% endfor %}
 {% else %}
-<h1> All users returned books on time </h1>
+<h1> There is no book in library </h1>
 {% endif %}
 {% endblock %}

@@ -20,5 +20,6 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
-    path('not-on-time', views.not_on_time)
+    path('not-on-time', views.not_on_time),
+    path('all-book', views.all_book)
 ]
