@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Main page of library</title>
+</head>
+<body>
+<h1>Welcome to out SmartLibrary. Here you can select appropriate request</h1>
+<h3><a href="{% url 'book' %}">1. show information about all books in library</a></h3>
+<h3>2. show information about a specific book (by id)</h3>
+<h3>3. show information about all unordered book</h3>
+<h3>4. show information about book filtering by different criteria (by author, by part of name, etc.)</h3>
+<h3>5. show all books given by specific user (by id)</h3>
+<h3>6. show all books for specific author (by id)</h3>
+<h3>7. show information about all books sorted by name (asc and desc order), sorted by count</h3>
+<h3>8. show information about all orders sorted by date (created, plated at)</h3>
+<h3><a href="{% url 'not-on-time' %}">9. show information about users who doesn't hand over books on time</a></h3>
+
+
+
+</body>
+</html>
