@@ -19,7 +19,7 @@ from book import views
 
 urlpatterns = [
     path('<str:sort>', views.all_book,  name = 'book'),
-    #path('<int:pk>', views.book_by_id,  name = 'book'),
-    path('<int:pk>', views.book_by_id),
+    path('<int:val>', views.all_book,  name = 'book'),
+    #path('ref', views.book_by_id,  name = 'book'),
     path('', views.all_book,  name = 'book'),
 ]

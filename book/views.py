@@ -26,8 +26,21 @@ def all_book(request, sort='id'):
         context.sort(key=lambda book: book.name, reverse=True)
         title = 'sort by name_desc'
         content = 'Selected by book name in descending mode'
+    if type(int(sort)) == int:
+        pk=int(sort)
+        context = Book.objects.filter(id=pk)
+        title = f'sort by specific id = {pk}'
+        content = f'sort by specific id = {pk}'
     return render(request, 'book/all_book.html', {'title': title, 'content': content, 'context': context})
 
-def book_by_id(request, pk=0):
-    context = Book.objects.get(id=pk)
-    return render(request, 'book/all_book.html', {'context': context})
+# def book_by_id(request, pk=0):
+#     context = Book.objects.get(id=pk)
+#     title = 'sort by specific id'
+#     content = f'Selected by specific id = {pk}'
+#     return render(request, 'book/all_book.html', {'title': title, 'content': content, 'context': context})
+
+# def book_by_id(request,pk):
+#     context = Book.objects.filter(id=pk)
+#     title = 'sort by specific id'
+#     content = f'Selected by specific id = 1'
+#     return render(request, 'book/all_book.html', {'title': title, 'content': content, 'context': context})
