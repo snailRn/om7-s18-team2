@@ -14,6 +14,26 @@
 <h4><a href="{% url 'book_sort' 'name_asc' %}">1.2 by name asc</a></h4>
 <h4><a href="{% url 'book_sort' 'name_desc' %}">1.3 by name desc</a></h4>
 <h4><a href="{% url 'book_sort' 'count' %}">1.4 by count</a></h4>
+<h3>2. show information about a specific book (by id) </a></h3>
+<h3>
+<select id="myselection">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+</select>
+<button id="submit" onclick="getOption()"> Get book (by id) </button> </h3>
+
+<h3>
+  <script>
+  function getOption() {
+    var url = "{% url 'book-by-id' 123 %}";
+    selectElement = document.querySelector('#myselection');
+    var id = selectElement.value;
+    window.open(url.replace('123', id) );
+  }
+  </script>
+</body>
+</h3>
 <h3>2. show information about a specific book (by id)</h3>
 <h3>3. show information about all unordered book</h3>
 <h3>4. show information about book filtering by different criteria (by author, by part of name, etc.)</h3>

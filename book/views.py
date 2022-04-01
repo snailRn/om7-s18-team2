@@ -3,6 +3,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from book.models import Book
 
+def book_by_id(request, id=0):
+    context = Book.objects.get(pk=id)
+    return render(request, 'book/about_book.html', {'context': context})
 
 def all_book(request, sort='id'):
     """
@@ -11,7 +14,7 @@ def all_book(request, sort='id'):
     """
     context = Book.get_all()
     if sort == 'id':
-        context.sort(key=lambda book: book.id)
+        # context.sort(key=lambda book: book.id)
         title = 'sort by id'
         content = 'Selected by book id'
     if sort == 'count':
@@ -28,4 +31,3 @@ def all_book(request, sort='id'):
         content = 'Selected by book name in descending mode'
 
     return render(request, 'book/all_book.html', {'title': title, 'content': content, 'context': context})
-
