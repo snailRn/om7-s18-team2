@@ -20,6 +20,8 @@
   <option value="1">1</option>
   <option value="2">2</option>
   <option value="3">3</option>
+  <option value="101">101</option>  
+  
 </select>
 <button id="submit" onclick="getOption()"> Get book (by id) </button> </h3>
 
@@ -29,7 +31,7 @@
     var url = "{% url 'book-by-id' 123 %}";
     selectElement = document.querySelector('#myselection');
     var id = selectElement.value;
-    window.open(url.replace('123', id) );
+    window.open(url.replace('123', id), "_self");
   }
   </script>
 </body>
@@ -43,8 +45,7 @@
 <h4>7.1 by created_at</a></h4>
 <h4>7.2 by plated at</a></h4>
 <h3><a href="{% url 'not-on-time' %}">8. show information about users who doesn't hand over books on time</a></h3>
-
-
+<h3>  <button onclick="location.href='{% url 'add_info' %}'"> Set info into base </button></h3>
 
 </body>
 </html>
