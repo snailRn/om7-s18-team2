@@ -2,8 +2,12 @@
 
 {% block context %}
 {% if context %}
-        <option value="" > {{context.id}} {{context.name}} {{context.description}} {{context.count}} {{context.authors}} </option>
+        <option value="" > {{context.id}} {{context.name}} {{context.description}} {{context.count}}
+                {%for author in context.authors.all%}
+                {{author.name}} {{author.patronymic}} {{author.surname}}
+                {% endfor %} </option>
 {% else %}
 <h1> There is no such book in library </h1>
 {% endif %}
 {% endblock %}
+
