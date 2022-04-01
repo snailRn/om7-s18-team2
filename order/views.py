@@ -13,23 +13,23 @@ def not_on_time(request):
     context = Order.get_not_returned_books()
     return render(request, 'order/not_on_time.html', {'title': title, 'content': content, 'context': context})
 
-def selection_date(request, sort='all'):
+def selection_date(request, address = 'all'):
     """
     title - name of our page, which you can see in browser when mouse is pointed on web-site
     content - name of selection type
     """
-    context = Order.objects.all()
-    if sort == 'all':
+    #context = Order.get_all()
+    if address == 'all':
+        context = Order.objects.all().order_by('date')
         title = 'order selection'
         content = 'Selected all orders'
-    if sort == 'created_at':
-        context.sort(key=lambda order: order.created_at)
+    if address == 'created_at':
+        context = Order.objects.all().order_by('created_at')
         title = 'order selection'
         content = 'Selected by by created at date'
-    if sort == 'plated_at':
-        context.sort(key=lambda order: order.plated_end_at)
+    if address == 'plated_at':
+        context = Order.objects.all().order_by('plated_end_at')
         title = 'order selection'
         content = 'Selected by by plated at date'
-
-    return render(request, 'order/not_on_time.html, {'title': title, 'content': content, 'context': context})
+    return render(request, 'order/not_on_time.html', {'title': title, 'content': content, 'context': context})
 
