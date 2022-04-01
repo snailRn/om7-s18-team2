@@ -5,7 +5,9 @@ from book.models import Book
 
 def book_by_id(request, id=0):
     context = Book.objects.get(pk=id)
-    return render(request, 'book/about_book.html', {'context': context})
+    title = 'Book by id'
+    content = 'Book by id'    
+    return render(request, 'book/about_book.html', {'title': title, 'content': content, 'context': context})
 
 def all_book(request, sort='id'):
     """

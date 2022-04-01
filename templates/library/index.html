@@ -35,6 +35,8 @@
   <option value="1">1</option>
   <option value="2">2</option>
   <option value="3">3</option>
+  <option value="101">101</option>  
+  
 </select>
 <button id="submit" onclick="getOption()"> Get book (by id) </button> </h3>
 
@@ -73,6 +75,7 @@
 
 
 <h3><a href="{% url 'not-on-time' %}">8. show information about users who doesn't hand over books on time</a></h3>
+<h3>  <button onclick="location.href='{% url 'add_info' %}'"> Set info into base </button></h3>
 
 </body>
 </html>
