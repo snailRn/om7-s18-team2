@@ -10,7 +10,31 @@
 <body>
 <h1>Welcome to out SmartLibrary. Here you can select appropriate request</h1>
 <h3><a href="{% url 'book' %}">1. show information about all books in library</a></h3>
-<h3>2. show information about a specific book (by id)</h3>
+<h3><a href="{% url 'book-by-id' '1' %}">2. show information about a specific book (by id) </a></h3>
+<h3>
+<select id="myselection">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+</select>
+<button id="submit" onclick="getOption()"> Get book (by id) </button> </h3>
+
+<h3>
+  <script>
+  function getOption() {
+    var url = "{% url 'book-by-id' 123 %}";
+    selectElement = document.querySelector('#myselection');
+    var id = selectElement.value;
+    window.open(url.replace('123', id) );
+  }
+  </script>
+</body>
+
+
+</h3>
+
+
+
 <h3>3. show information about all unordered book</h3>
 <h3>4. show information about book filtering by different criteria (by author, by part of name, etc.)</h3>
 <h3>5. show all books given by specific user (by id)</h3>

@@ -19,4 +19,6 @@ from book import views
 
 urlpatterns = [
     path('all', views.all_book,  name = 'book'),
+    path('get-by-id/<int:id>/', views.book_by_id,  name = 'book-by-id'),
+    
 ]
