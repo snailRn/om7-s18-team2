@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block context %}
+{% if context %}
+    {% for el in context %}
+        <option value="" > {{el.id}} {{el.user}} {{el.book}} {{el.created_at}} {{el.end_at}} {{el.plated_end_at}}</option>
+    {% endfor %}
+{% else %}
+<h1> There is no order in library </h1>
+{% endif %}
+{% endblock %}

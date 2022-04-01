@@ -20,4 +20,5 @@ from order import views
 urlpatterns = [
     path('not_on_time', views.not_on_time,  name = 'not-on-time'),
     path('sorting/<str:address>', views.selection_date,  name = 'order-by-date'),
+    path('user_books/<int:id>', views.user_books,  name = 'user_books'),
 ]

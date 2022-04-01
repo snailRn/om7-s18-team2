@@ -32,10 +32,17 @@
 <h3>2. show information about a specific book (by id) </a></h3>
 <h3>
 <select id="myselection">
-  <option value="1">1</option>
+{% block context %}  
+  {% for book in context %}
+  <option value="" > 
+        {{book.id}}    
+  </option>
+  {% endfor %}
+{% endblock %}
+  <!-- <option value="1">1</option>
   <option value="2">2</option>
   <option value="3">3</option>
-  <option value="101">101</option>  
+  <option value="101">101</option>   -->
   
 </select>
 <button id="submit" onclick="getOption()"> Get book (by id) </button> </h3>
@@ -53,7 +60,7 @@
 
 <h3>3. show information about all unordered book</h3>
 <h3>4. show information about book filtering by different criteria (by author, by part of name, etc.)</h3>
-<h3>5. show all books given by specific user (by id)</h3>
+<h3><a href="{% url 'user_books' 111 %}">5. show all books given by specific user (by id)</a></h3>
 <h3>6. show all books for specific author (by id)</h3>
 <h3>7. show information about all orders sorted by date (created, plated at):</h3>
 <h3>
