@@ -16,7 +16,6 @@ def all_book(request, sort='id'):
     """
     context = Book.get_all()
     if sort == 'id':
-        # context.sort(key=lambda book: book.id)
         title = 'sort by id'
         content = 'Selected by book id'
     if sort == 'count':
