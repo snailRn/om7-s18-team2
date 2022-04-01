@@ -18,4 +18,5 @@ from order import views
 
 urlpatterns = [
     path('not_on_time', views.not_on_time,  name = 'not-on-time'),
+    path('not_on_time', views.not_on_time,  name = 'not-on-time'),
 ]
