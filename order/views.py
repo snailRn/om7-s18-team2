@@ -33,3 +33,10 @@ def selection_date(request, address = 'all'):
         content = 'Selected by by plated at date'
     return render(request, 'order/not_on_time.html', {'title': title, 'content': content, 'context': context})
 
+def user_books(request, id=0):
+    context = Order.objects.all().filter(user = id)
+    print(context)
+    title = 'order selection'
+    content = 'Selected all orders'    
+    return render(request, 'order/books_on_hands.html', {'title': title, 'content': content, 'context': context})
+

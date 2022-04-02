@@ -62,11 +62,9 @@ line-height: 0.9 em;
 <h5>2. show information about a specific book (by id) </a></h5>
 <h7>
 <select id="myselection">
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="101">101</option>  
-  
+  {% for book in all_books %}
+  <option value="{{book.id}}" >{{book.id}}</option>
+  {% endfor %}
 </select>
 <button id="submit" onclick="getOption()"> Get book (by id) </button> </h7>
 </p>
@@ -77,6 +75,7 @@ line-height: 0.9 em;
     selectElement = document.querySelector('#myselection');
     var id = selectElement.value;
     window.open(url.replace('123', id), "_self");
+
   }
   </script>
 
@@ -86,11 +85,46 @@ line-height: 0.9 em;
 <h5>4. show information about book filtering by different criteria (by author, by part of name, etc.)</h5></p>
 <p class="dline">
 <h5>5. show all books given by specific user (by id)</h5></p>
+<select id="userselection">
+  {% for userh in all_users %}
+  <option value="{{userh.id}}" >{{userh.first_name}} {{userh.last_name}}</option>
+  {% endfor %}
+ 
+</select>
+<button id="submit_user" onclick="get_users_book()"> Get user's book (by id) </button> </h3>
+
+
+  <script>
+  function get_users_book() {
+    var url = "{% url 'user_books' 123 %}";
+    selectElement = document.querySelector('#userselection');
+    var id = selectElement.value;
+    window.open(url.replace('123', id), "_self");
+  }
+  </script>
+
 <p class="dline">
 <h5>6. show all books for specific author (by id)</h5></p>
+<select id="authot_selection">
+  {% for authorh in all_authors %}
+  <option value="{{authorh.id}}" >{{authorh.name}} {{authorh.surname}}</option>
+  {% endfor %}
+ 
+</select>
+<button id="submit_user" onclick="get_author_book()"> Get author's books (by id) </button> </h3>
+
+
+  <script>
+  function get_author_book() {
+    var url = "{% url 'author_books' 123 %}";
+    selectElement = document.querySelector('#authot_selection');
+    var id = selectElement.value;
+    window.open(url.replace('123', id), "_self");
+  }
+  </script>
+
 <p class="dline">
 <h5>7. show information about all orders sorted by date (created, plated at):</h5></p>
-
 <p class="dline">
 <h7>
 <select id="selectt">
@@ -107,8 +141,6 @@ line-height: 0.9 em;
     window.open(url.replace('444', id), "_self");
   }
   </script>
-
-
 
 <p class="dline">
 <h5><a href="{% url 'not-on-time' %}">8. show information about users who doesn't hand over books on time</a></h5></p>
