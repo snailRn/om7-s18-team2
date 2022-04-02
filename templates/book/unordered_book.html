@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block context %}
+{% if context %}
+    {% for el in context %}
+        <option value="" > {{el.id}} {{el.name}} {{el.description}} {{el.count}} {{el.difference}}
+                            {%for author in el.authors.all%}
+                {{author.name}} {{author.patronymic}} {{author.surname}}
+                {% endfor %} </option> </option>
+    {% endfor %}
+{% else %}
+<h1> There is no book in library </h1>
+{% endif %}
+{% endblock %}

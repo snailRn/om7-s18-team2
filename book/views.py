@@ -2,6 +2,7 @@ from audioop import reverse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from book.models import Book
+from order.models import Order
 
 def book_by_id(request, id=0):
     context = Book.objects.get(pk=id)
@@ -32,3 +33,29 @@ def all_book(request, sort='id'):
         content = 'Selected by book name in descending mode'
 
     return render(request, 'book/all_book.html', {'title': title, 'content': content, 'context': context})
+
+def unodered_books(request):
+    list_unodered_books = []
+    all_books = Book.objects.all()
+    all_orders = Order.objects.all()
+    for book in all_books:
+        ordered_book=0
+        for order in all_orders:
+            if book.id == order.book.id:
+                ordered_book += 1
+        difference = book.count - ordered_book
+        if difference > 0:
+            book_dict = {
+                'id': book.id,
+                'name': book.name,
+                'description': book.description,
+                'count': book.count,
+                'authors': book.authors,
+                'difference': difference
+                        }
+            list_unodered_books.append(book_dict)
+
+    context = list_unodered_books
+    title = 'all unordered book'
+    content = 'all unordered book'
+    return render(request, 'book/unordered_book.html', {'title': title, 'content': content, 'context': context})
