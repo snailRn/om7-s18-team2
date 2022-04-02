@@ -1,13 +1,41 @@
 {% extends 'base.html' %}
 
 {% block context %}
+<style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+
 {% if context %}
+<table style="width:90%">
+<tr>
+<td>Book ID</td>
+<td>Book name</td>
+<td>Book description</td>
+<td>Book count</td>
+<td>Number of available books </td>
+<td>Author name</td>
+
+</tr>
+
     {% for el in context %}
-        <option value="" > {{el.id}} {{el.name}} {{el.description}} {{el.count}} {{el.difference}}
-                            {%for author in el.authors.all%}
-                {{author.name}} {{author.patronymic}} {{author.surname}}
-                {% endfor %} </option> </option>
+<tr>
+        <option value="" >
+                <td>{{el.id}}</td>
+                <td>{{el.name}}</td>
+                <td>{{el.description}}</td>
+                <td>{{el.count}}</td>
+                <td>{{el.difference}}</td>
+                <td>{%for author in el.authors.all%}
+                {{author.surname}}
+                {{author.name}}
+                {{author.patronymic}}<p1>;</p1>
+                {% endfor %}</td> </option>
+</tr>
+
     {% endfor %}
+</table>
 {% else %}
 <h1> There is no book in library </h1>
 {% endif %}
