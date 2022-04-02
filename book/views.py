@@ -42,7 +42,7 @@ def unodered_books(request):
     for book in all_books:
         ordered_book=0
         for order in all_orders:
-            if book.id == order.book.id:
+            if book.id == order.book.id and order.end_at == None:
                 ordered_book += 1
         difference = book.count - ordered_book
         if difference > 0:
