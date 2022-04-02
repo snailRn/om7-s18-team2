@@ -1,13 +1,41 @@
 {% extends 'base.html' %}
 
 {% block context %}
+<style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+
+
 {% if context %}
-        <option value="" > {{context.id}} {{context.name}} {{context.description}} {{context.count}}
-                {%for author in context.authors.all%}
-                {{author.name}} {{author.patronymic}} {{author.surname}}<h3>,</h3>
-                {% endfor %} </option>
-{% else %}
+<table style="width:90%">
+<tr>
+<td>Book ID</td>
+<td>Book name</td>
+<td>Book description</td>
+<td>Book count</td>
+<td>Author name</td>
+
+</tr>
+<tr>
+        <option value="" >
+                <td>{{context.id}}</td>
+                <td>{{context.name}}</td>
+                <td>{{context.description}}</td>
+                <td>{{context.count}}</td>
+                <td>{%for author in context.authors.all%}
+                {{author.surname}}
+                {{author.name}}
+                {{author.patronymic}}<p1>;</p1>
+                {% endfor %}</td> </option>
+</tr>
+</table>
+        {% else %}
 <h1> There is no such book in library </h1>
 {% endif %}
+
+
+
 {% endblock %}
 
