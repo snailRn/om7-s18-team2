@@ -18,5 +18,5 @@ from django.urls import path, include
 from authentication import views
 
 urlpatterns = [
-    path('add-information', views.add_info,  name = 'add_info'),
+    path('add-information/', views.add_info,  name = 'add_info'),
 ]

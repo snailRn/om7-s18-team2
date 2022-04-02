@@ -32,21 +32,13 @@
 <h3>2. show information about a specific book (by id) </a></h3>
 <h3>
 <select id="myselection">
-{% block context %}  
-  {% for book in context %}
-  <option value="" > 
-        {{book.id}}    
-  </option>
+  {% for book in all_books %}
+  <option value="{{book.id}}" >{{book.id}}</option>
   {% endfor %}
-{% endblock %}
-  <!-- <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="101">101</option>   -->
-  
 </select>
-<button id="submit" onclick="getOption()"> Get book (by id) </button> </h3>
 
+
+<button id="submit" onclick="getOption()"> Get book (by id) </button> </h3>
 
   <script>
   function getOption() {
@@ -54,14 +46,52 @@
     selectElement = document.querySelector('#myselection');
     var id = selectElement.value;
     window.open(url.replace('123', id), "_self");
+
   }
   </script>
 
 
 <h3>3. show information about all unordered book</h3>
 <h3>4. show information about book filtering by different criteria (by author, by part of name, etc.)</h3>
-<h3><a href="{% url 'user_books' 111 %}">5. show all books given by specific user (by id)</a></h3>
+<h3>5. show all books given by specific user (by id)</h3>
+<select id="userselection">
+    {% for userh in all_users %}
+    <option value="{{userh.id}}" >{{userh.first_name}} {{userh.last_name}}</option>
+    {% endfor %}
+   
+  </select>
+  <button id="submit_user" onclick="get_users_book()"> Get user's book (by id) </button> </h3>
+  
+  
+    <script>
+    function get_users_book() {
+      var url = "{% url 'user_books' 123 %}";
+      selectElement = document.querySelector('#userselection');
+      var id = selectElement.value;
+      window.open(url.replace('123', id), "_self");
+    }
+    </script>
+
 <h3>6. show all books for specific author (by id)</h3>
+<select id="authot_selection">
+  {% for authorh in all_authors %}
+  <option value="{{authorh.id}}" >{{authorh.name}} {{authorh.surname}}</option>
+  {% endfor %}
+ 
+</select>
+<button id="submit_user" onclick="get_author_book()"> Get author's books (by id) </button> </h3>
+
+
+  <script>
+  function get_author_book() {
+    var url = "{% url 'author_books' 123 %}";
+    selectElement = document.querySelector('#authot_selection');
+    var id = selectElement.value;
+    window.open(url.replace('123', id), "_self");
+  }
+  </script>
+
+
 <h3>7. show information about all orders sorted by date (created, plated at):</h3>
 <h3>
 <select id="selectt">
@@ -78,9 +108,6 @@
     window.open(url.replace('444', id), "_self");
   }
   </script>
-
-
-
 <h3><a href="{% url 'not-on-time' %}">8. show information about users who doesn't hand over books on time</a></h3>
 <h3>  <button onclick="location.href='{% url 'add_info' %}'"> Set info into base </button></h3>
 
