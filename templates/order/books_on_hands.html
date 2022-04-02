@@ -1,11 +1,41 @@
 {% extends 'base.html' %}
 
 {% block context %}
+<style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+
 {% if context %}
+<table style="width:90%">
+<tr>
+<td>Order ID</td>
+<td>User</td>
+<td>Book</td>
+<td>Created</td>
+<td>End</td>
+<td>Planed end</td>
+
+
+</tr>
+
     {% for el in context %}
-        <option value="" > {{el.id}} {{el.user}} {{el.book}} {{el.created_at}} {{el.end_at}} {{el.plated_end_at}}</option>
+<tr>
+        <option value="" >
+                <td>{{el.id}}</td>
+                <td>{{el.user}}</td>
+                <td>{{el.book}}</td>
+                <td>{{el.created_at}}</td>
+                <td>{{el.end_at}}</td>
+                <td>{{el.plated_end_at}}</td>
+                 </option>
+</tr>
+
     {% endfor %}
+</table>
+
 {% else %}
-<h1> There is no order in library </h1>
+    <h1> There is no order in library </h1>
 {% endif %}
 {% endblock %}

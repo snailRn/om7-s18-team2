@@ -1,5 +1,6 @@
 from audioop import reverse
 from django.shortcuts import render, redirect
+from django.db.models import Q
 from django.http import HttpResponse
 from book.models import Book
 from order.models import Order
@@ -7,7 +8,7 @@ from order.models import Order
 def book_by_id(request, id=0):
     context = Book.objects.get(pk=id)
     title = 'Book by id'
-    content = 'Book by id'    
+    content = f'Book by id = {id}'    
     return render(request, 'book/about_book.html', {'title': title, 'content': content, 'context': context})
 
 def all_book(request, sort='id'):
@@ -64,5 +65,9 @@ def filter_book(request):
     filter_opt = request.GET
     title = 'filtered books'
     content = 'filtered books'
-    context = Book.objects.filter(name__contains=filter_opt.get('book'), authors__name__contains = filter_opt.get('author')).distinct()
+    filter_par = Q(name__icontains=filter_opt.get('book')) & (Q(authors__name__icontains = filter_opt.get('author')) | \
+                        Q(authors__surname__icontains = filter_opt.get('author')) | \
+                        Q(authors__patronymic__icontains = filter_opt.get('author')) )
+    context = Book.objects.filter(filter_par).distinct()
     return render(request, 'book/all_book.html', {'title': title, 'content': content, 'context': context})
+    
