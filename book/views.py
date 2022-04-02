@@ -59,3 +59,10 @@ def unodered_books(request):
     title = 'all unordered book'
     content = 'all unordered book'
     return render(request, 'book/unordered_book.html', {'title': title, 'content': content, 'context': context})
+
+def filter_book(request):
+    filter_opt = request.GET
+    title = 'filtered books'
+    content = 'filtered books'
+    context = Book.objects.filter(name__contains=filter_opt.get('book'), authors__name__contains = filter_opt.get('author')).distinct()
+    return render(request, 'book/all_book.html', {'title': title, 'content': content, 'context': context})
