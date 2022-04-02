@@ -3,7 +3,11 @@
 {% block context %}
 {% if context %}
     {% for el in context %}
-        <option value="" > {{el.id}} {{el.user}} {{el.book}} {{el.created_at}} {{el.end_at}} {{el.plated_end_at}}</option>
+        <option value="" > {{el.user.id}} {{el.user.first_name}} {{el.user.middle_name}} {{el.user.last_name}}
+            {{el.user.email}} {{el.id}} {{el.book.name}}
+            {%for author in el.authors.all%}
+            {{author.name}} {{author.patronymic}} {{author.surname}} {% endfor %}
+            {{el.created_at}} {{el.plated_end_at}}</option>
     {% endfor %}
 {% else %}
 <h1> There is no order in library </h1>
