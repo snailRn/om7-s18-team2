@@ -35,8 +35,6 @@ def selection_date(request, address = 'all'):
 
 def user_books(request, id=0):
     context = Order.objects.all().filter(user = id)
-    print(context)
     title = 'order selection'
-    content = 'Selected all orders'    
+    content = f'Selected all orders by user.id = {id}'    
     return render(request, 'order/books_on_hands.html', {'title': title, 'content': content, 'context': context})
-

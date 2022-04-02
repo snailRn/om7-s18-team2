@@ -7,7 +7,7 @@ from order.models import Order
 def book_by_id(request, id=0):
     context = Book.objects.get(pk=id)
     title = 'Book by id'
-    content = 'Book by id'    
+    content = f'Book by id = {id}'    
     return render(request, 'book/about_book.html', {'title': title, 'content': content, 'context': context})
 
 def all_book(request, sort='id'):
