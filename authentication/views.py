@@ -1,11 +1,40 @@
-from django.shortcuts import render
+from cmath import cos
+from django.shortcuts import render, redirect
 from authentication.models import CustomUser
 from author.models import Author
 from book.models import Book
 from order.models import Order
+from authentication.forms import CustomUserForm
 
 import datetime
 import pytz
+
+def users(request):
+    context = CustomUser.get_all()
+    title = 'users'
+    content = 'all users'
+    return render(request, 'authentication/users.html', {'title': title, 'content': content, 'context': context})
+
+def add_user_info(request, id=0):
+    if request.method == 'GET':
+        if id == 0:
+            form = CustomUserForm()
+        else:
+            user = CustomUser.objects.get(pk=id)
+            form = CustomUserForm(instance=user)
+        return render(request, 'authentication/userinfo.html', {'form': form})
+    else:
+        if id == 0:
+            form = CustomUserForm(request.POST)
+        else:
+            user = CustomUser.objects.get(pk=id)
+            form = CustomUserForm(request.POST, instance=user)
+    if form.is_valid():
+        form.save()
+    return redirect('users')
+
+
+
 
 def add_info(request):
     try:

@@ -18,5 +18,6 @@ from django.urls import path, include
 from authentication import views
 
 urlpatterns = [
-    path('add-information/', views.add_info,  name = 'add_info'),
+    path('users/', views.users,  name = 'users'),  
+    path('user_info/<int:id>/', views.add_user_info,  name = 'add_info'),    
 ]
