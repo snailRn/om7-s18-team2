@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block context %}
+<form action="", method="post", autocomplete="off">
+    {% csrf_token %}
+<h5>    &emsp; <label for="first_name">first_name:</label>
+    {{form.first_name}}<br> 
+    <br>
+    &emsp; <label for="middle_name">middle_name:</label>
+    {{form.middle_name}}<br>
+    <br>
+    &emsp; <label for="last_name">last_name:</label>
+    {{form.last_name}}<br>
+    <br>
+    &emsp; <label for="email">email:</label>
+    {{form.email}}<br>
+    <br>
+    &emsp; <label for="password" input type="password">password:</label>
+    {{form.password}}<br>
+    <br>
+    &emsp; <label for="role">role:</label>
+    {{form.role}}<br>
+    <br>
+</h5>
+    &emsp; <button type="submit" onclick="location.href='{% url 'users' %}'">Submit user</button>
+</form>
+{% endblock %} 
