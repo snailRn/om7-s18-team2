@@ -24,4 +24,6 @@ urlpatterns = [
     path('order/', include('order.urls')),
     path('authentication/', include('authentication.urls')),
     path('author/', include('author.urls')),
+    path('options/',views.options, name='options'),
+    
 ]
