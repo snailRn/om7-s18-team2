@@ -25,10 +25,10 @@ line-height: 0.9 em;
 
 <script>
 function mySortselection() {
-  var url = "{% url 'book_sort' 765 %}";
+  var url = "{% url 'book_sort' 0 %}";
   selectElement = document.querySelector('#myselect');
   var id = selectElement.value;
-  window.open(url.replace('765', id), "_self");
+  window.open(url.replace('0', id), "_self");
 }
 </script>
 
@@ -45,10 +45,10 @@ function mySortselection() {
 
 <script>
 function getOption() {
-  var url = "{% url 'book-by-id' 123 %}";
+  var url = "{% url 'book-by-id' 0 %}";
   selectElement = document.querySelector('#myselection');
   var id = selectElement.value;
-  window.open(url.replace('123', id), "_self");
+  window.open(url.replace('0', id), "_self");
 
 }
 </script>
