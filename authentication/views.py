@@ -33,6 +33,14 @@ def add_user_info(request, id=0):
         form.save()
     return redirect('users')
 
+def delete_user(request, id=0):
+    user = CustomUser.objects.get(pk=id)
+    if user:
+        user.delete()
+    context = CustomUser.get_all()
+    title = 'users'
+    content = 'all users'
+    return render(request, 'authentication/users.html', {'title': title, 'content': content, 'context': context})
 
 
 

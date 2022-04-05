@@ -35,7 +35,7 @@ table, th, td {
 <h1> There is no users</h1>
 {% endif %}
 <br>
-<h7>&emsp;<button onclick="location.href='{% url 'add_info' 0 %}'">Add new user</button></h7></p>
+<h7>&emsp;<button onclick="location.href='{% url 'add_user_info' 0 %}'">Add new user</button></h7></p>
 
 &emsp;<select id="user_selection">
     {% for user in context %}
@@ -43,16 +43,29 @@ table, th, td {
     {% endfor %}
     
     </select>
-    <button id="submit_user" onclick="get_user_info()"> Change user info </button> </h3>
+    <button id="submit_user" onclick="get_user_info()"> Change user info </button> 
     
     
     <script>
     function get_user_info() {
         selectElement = document.querySelector('#user_selection');
-        var url = "{% url 'add_info' 0 %}";
+        var url = "{% url 'add_user_info' 0 %}";
         var id = selectElement.value;
         window.open(url.replace('0', id), "_self");
     }
+    </script>
+
+    <button id="delete_user" onclick="delete_user()"> Delete user </button>
+    
+    
+    <script>
+    function delete_user() {
+        selectElement = document.querySelector('#user_selection');
+        var url = "{% url 'delete_user' 0 %}";
+        var id = selectElement.value;
+        window.open(url.replace('0', id), "_self");
+    }
+
     </script>
 
 {% endblock %} 

@@ -19,5 +19,8 @@ from authentication import views
 
 urlpatterns = [
     path('users/', views.users,  name = 'users'),  
-    path('user_info/<int:id>/', views.add_user_info,  name = 'add_info'),    
+    path('user_info/<int:id>/', views.add_user_info,  name = 'add_user_info'),
+    path('delete_user/<int:id>/', views.delete_user,  name = 'delete_user'),
+    path('add-information/', views.add_info,  name = 'add_info'),
+        
 ]
