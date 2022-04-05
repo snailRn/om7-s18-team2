@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block context %}
+<title>Mainpage</title>
+<style>
+p.dline {
+line-height: 2;
+}
+p {
+line-height: 0.9 em;
+}
+</style>
+
+
+<p class="dline">
+<h3>&emsp;Welcome to out SmartLibrary. Here you can select appropriate request</h3></p>
+<p class="dline">
+<h5>&emsp;1. show information about all books in library and sort by:</h5></p>
+
+<p class="dline">
+<h7>&emsp;
+<select id="myselect">
+<option value="id">by id</option>
+<option value="name_asc">by ascending name</option>
+<option value="name_desc">by descending name</option>
+<option value="count">by count</option>
+</select>
+<button id="submit" onclick="mySortselection()"> Sort books by </button> </h7>
+</p>
+
+<script>
+function mySortselection() {
+  var url = "{% url 'book_sort' 765 %}";
+  selectElement = document.querySelector('#myselect');
+  var id = selectElement.value;
+  window.open(url.replace('765', id), "_self");
+}
+</script>
+
+<p class="dline">
+<h5>&emsp;2. show information about a specific book (by id) </h5>
+<h7>&emsp;
+<select id="myselection">
+{% for book in all_books %}
+<option value="{{book.id}}" >{{book.id}}</option>
+{% endfor %}
+</select>
+<button id="submit" onclick="getOption()"> Get book (by id) </button> </h7>
+</p>
+
+<script>
+function getOption() {
+  var url = "{% url 'book-by-id' 123 %}";
+  selectElement = document.querySelector('#myselection');
+  var id = selectElement.value;
+  window.open(url.replace('123', id), "_self");
+
+}
+</script>
+
+<p class="dline">
+<h5>&emsp;<a href="{% url 'book_unodered' %}">3. show information about all unordered book</a></h5> </p>
+
+<p class="dline">
+<h5>&emsp;4. show information about book filtering by different criteria (by author, by part of name, etc.)</h5></p>
+<h5>&emsp;author: <input type="text" id="authorname">  name of book: <input type="text" id="bookname"> <button id="filterbook" onclick="filterbook()"> Filter book</button> </h5>
+<script>
+function filterbook() {
+  var url = "{% url 'filter_book' %}";
+  filer_author = document.querySelector('#authorname');
+  filer_book = document.querySelector('#bookname');
+  fstring = `?author=${filer_author.value}&book=${filer_book.value}`
+  window.open(url + fstring, "_self");
+
+}
+</script>
+
+<p class="dline">
+<h5>&emsp;5. show all books given by specific user (by id)</h5></p>
+&emsp;<select id="userselection">
+{% for userh in all_users %}
+<option value="{{userh.id}}" >{{userh.first_name}} {{userh.last_name}}</option>
+{% endfor %}
+
+</select>
+&emsp;<button id="submit_user" onclick="get_users_book()"> Get user's book (by id) </button> </h3>
+
+
+<script>
+function get_users_book() {
+  var url = "{% url 'user_books' 123 %}";
+  selectElement = document.querySelector('#userselection');
+  var id = selectElement.value;
+  window.open(url.replace('123', id), "_self");
+}
+</script>
+
+<p class="dline">
+<h5>&emsp;6. show all books for specific author (by id)</h5></p>
+&emsp;<select id="authot_selection">
+{% for authorh in all_authors %}
+<option value="{{authorh.id}}" >{{authorh.name}} {{authorh.surname}}</option>
+{% endfor %}
+
+</select>
+<button id="submit_user" onclick="get_author_book()"> Get author's books (by id) </button> </h3>
+
+
+<script>
+function get_author_book() {
+  var url = "{% url 'author_books' 123 %}";
+  selectElement = document.querySelector('#authot_selection');
+  var id = selectElement.value;
+  window.open(url.replace('123', id), "_self");
+}
+</script>
+
+<p class="dline">
+<h5>&emsp;7. show information about all orders sorted by date (created, plated at):</h5></p>
+<p class="dline">
+<h7>
+&emsp;<select id="selectt">
+<option value="created_at">created at</option>
+<option value="plated_at">plated at</option>
+</select>
+<button id="submit" onclick="Selection()"> Sorted orders by </button> </h7>
+</p>
+<script>
+function Selection() {
+  var url = "{% url 'order-by-date' 444 %}";
+  selectElement = document.querySelector('#selectt');
+  var id = selectElement.value;
+  window.open(url.replace('444', id), "_self");
+}
+</script>
+
+<p class="dline">
+<h5>&emsp;<a href="{% url 'not-on-time' %}">8. show information about users who doesn't hand over books on time</a></h5></p>
+<p class="dline">
+<h7>&emsp;<button onclick="location.href='{% url 'add_info' %}'"> Set info into base </button></h7></p>
+
+
+{% endblock %} 

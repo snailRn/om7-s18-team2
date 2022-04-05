@@ -8,6 +8,9 @@ from author.models import Author
 
 
 
-def index(request):
+def options(request):
     context = {'all_books': Book.get_all(), 'all_users':CustomUser.get_all(), 'all_authors':Author.get_all()}
-    return render(request, 'library/index.html', context)
+    return render(request, 'library/options.html', context)
+
+def index(request):
+    return render(request, 'library/index.html')
