@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block context %}
+<form action="", method="post", autocomplete="off">
+    {% csrf_token %}
+    <h5>    &emsp; <label for="User">user:</label>
+        {{form.user}}<br> 
+        <br>
+        &emsp; <label for="Book">book:</label>
+        {{form.book}}<br>
+        <br>
+        &emsp; <label for="plated_end_at">plated_end_at:</label>
+        {{form.plated_end_at}}<br>
+        <br>
+    </h5>
+    &emsp; <button type="submit" onclick="location.href='{% url 'all_orders' %}'">Submit order</button>
+    &emsp; <button type="button" onclick="location.href='{% url 'all_orders' %}'">Cancel order</button>
+    
+</form>
+{% endblock %} 

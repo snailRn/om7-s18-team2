@@ -22,4 +22,5 @@ urlpatterns = [
     path('all/<str:sort>/', views.all_book,  name = 'book_sort'),
     path('unordered/', views.unodered_books,  name = 'book_unodered'),
     path('filter/', views.filter_book, name='filter_book'),
+    
 ]

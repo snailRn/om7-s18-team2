@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block context %}
+<style>
+table, tr, td {
+  border:1px solid black;
+}
+table{
+    margin: auto;
+}
+</style>
+{% if context %}
+<h7>&emsp;<button onclick="location.href='{% url 'add_order_info'%}'">Add new Order</button></h7></p>
+
+<table style="width:90%" ><tr><td>Order ID</td><td>User ID</td><td>User name</td><td>User email</td>
+<td>Book ID</td><td>Book name</td><td>Author names</td><td>Created</td><td>Plated end</td><td>Closed at</td>
+<td>Change</td> <td>Close</td>
+</tr>
+    {% for el in context %}
+<tr>
+<td>{{el.id}}</td><td>{{el.user.id}}</td>
+<td>{{el.user.first_name}} {{el.user.middle_name}} {{el.user.last_name}}</td>
+<td>{{el.user.email}}</td>
+<td>{{el.id}}</td>
+<td>{{el.book.name}}</td>
+<td>{%for author in el.book.authors.all%} {{author.surname}} {{author.name}} {{author.patronymic}};{% endfor %}</td>
+<td>{{el.created_at}}</td>
+<td>{{el.plated_end_at}}</td>
+<td>{{el.end_at}}</td>
+<td> <button id="submit_order" onclick="location.href='{% url 'change_order_info' el.id %}'"> Change Order info </button> </td> 
+<td> 
+    {% if el.end_at == None %}
+    <div><button id="submit_order" onclick="location.href='{% url 'close_order' el.id %}'"> Close Order </button></div>
+    {% endif %}
+     </td>                 
+</tr>{% endfor %}</table>
+{% else %}
+
+<h1> There is no order in library </h1>
+{% endif %}
+
+
+{% endblock %}

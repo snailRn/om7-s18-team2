@@ -21,4 +21,10 @@ urlpatterns = [
     path('not_on_time', views.not_on_time,  name = 'not-on-time'),
     path('sorting/<str:address>', views.selection_date,  name = 'order-by-date'),
     path('user_books/<int:id>', views.user_books,  name = 'user_books'),
+    path('', views.all_orders,  name = 'all_orders'),
+    path('add-order/', views.add_order_info,  name = 'add_order_info'),
+    path('change-order/<int:id>', views.add_order_info,  name = 'change_order_info'),
+    path('close-order/<int:id>', views.close_order,  name = 'close_order'),
+    
+    
 ]
