@@ -24,9 +24,8 @@ def all_orders(request):
     """
     title = 'All orders'
     content = 'Orders'
-    context = Order.objects.all()
-    notclosed = Order.get_not_returned_books()
-    return render(request, 'order/all_orders.html', {'title': title, 'content': content, 'context': context, 'notclosed': notclosed})
+    context = Order.objects.all().order_by('id')
+    return render(request, 'order/all_orders.html', {'title': title, 'content': content, 'context': context})
 
 
 def selection_date(request, address = 'all'):
