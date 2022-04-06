@@ -1,0 +1,68 @@
+
+{% extends 'base.html' %}
+{% block context %}
+<style>
+table, th, td {
+  border:1px solid black;
+  margin: auto;
+}
+</style>
+{% if context %}
+<table style="width:90%">
+<tr>
+<td>Author ID</td>
+<td>Name</td>
+<td>Surname</td>
+<td>Patronymic</td>
+
+</tr>
+    {% for el in context %}
+<tr>
+        <option value="" >
+            <td>{{el.id}}</td>
+            <td>{{el.name}}</td>
+            <td>{{el.surname}}</td>
+            <td>{{el.patronymic}}</td>
+
+        </option>
+</tr>
+    {% endfor %}
+</table>
+{% else %}
+<h1> There is no authors</h1>
+{% endif %}
+<br>
+<h7>&emsp;<button onclick="location.href='{% url 'add_author_info' 0 %}'">Add new author</button></h7></p>
+
+&emsp;<select id="user_selection">
+    {% for user in context %}
+    <option value="{{user.id}}" >{{user.name}} {{user.surname}}</option>
+    {% endfor %}
+
+    </select>
+    <button id="submit_user" onclick="get_author_info()"> Change authors info </button>
+
+
+    <script>
+    function get_author_info() {
+        selectElement = document.querySelector('#user_selection');
+        var url = "{% url 'add_author_info' 0 %}";
+        var id = selectElement.value;
+        window.open(url.replace('0', id), "_self");
+    }
+    </script>
+
+    <button id="delete_author" onclick="delete_author()"> Delete author </button>
+
+
+    <script>
+    function delete_author() {
+        selectElement = document.querySelector('#user_selection');
+        var url = "{% url 'delete_author' 0 %}";
+        var id = selectElement.value;
+        window.open(url.replace('0', id), "_self");
+    }
+
+    </script>
+
+{% endblock %}

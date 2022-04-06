@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block context %}
+
+
+<form action="", method="post", autocomplete="off">
+    {% csrf_token %}
+<h5>    &emsp; <label for="name">Name:</label>
+    {{form.name}}<br>
+    <br>
+    &emsp; <label for="surname">Surname:</label>
+    {{form.surname}}<br>
+    <br>
+    &emsp; <label for="patronymic">Patronymic:</label>
+    {{form.patronymic}}<br>
+    <br>
+
+
+</h5>
+    &emsp; <button type="submit" onclick="location.href='{% url 'base_author' %}'">Submit author</button>
+    &emsp; <button type="button" onclick="location.href='{% url 'base_author' %}'">Cancel author</button>
+
+</form>
+{% endblock %}
+

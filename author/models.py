@@ -1,6 +1,7 @@
 from django.db import models, IntegrityError, DataError
 
 
+
 class Author(models.Model):
     """
         This class represents an Author. \n
@@ -136,3 +137,6 @@ class Author(models.Model):
         """
         all_users = Author.objects.all()
         return all_users
+
+    def get_absolute_url(self):
+        return '/author'
