@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block context %}
-<title>Mainpage</title>
 <style>
 p.dline {
 line-height: 2;
@@ -10,10 +9,6 @@ p {
 line-height: 0.9 em;
 }
 </style>
-
-
-<p class="dline">
-<h3>&emsp;Welcome to out SmartLibrary. Here you can select appropriate request</h3></p>
 <p class="dline">
 <h5>&emsp;1. show information about all books in library and sort by:</h5></p>
 
@@ -30,10 +25,10 @@ line-height: 0.9 em;
 
 <script>
 function mySortselection() {
-  var url = "{% url 'book_sort' 765 %}";
+  var url = "{% url 'book_sort' 0 %}";
   selectElement = document.querySelector('#myselect');
   var id = selectElement.value;
-  window.open(url.replace('765', id), "_self");
+  window.open(url.replace('0', id), "_self");
 }
 </script>
 
@@ -50,10 +45,10 @@ function mySortselection() {
 
 <script>
 function getOption() {
-  var url = "{% url 'book-by-id' 123 %}";
+  var url = "{% url 'book-by-id' 0 %}";
   selectElement = document.querySelector('#myselection');
   var id = selectElement.value;
-  window.open(url.replace('123', id), "_self");
+  window.open(url.replace('0', id), "_self");
 
 }
 </script>
@@ -88,10 +83,10 @@ function filterbook() {
 
 <script>
 function get_users_book() {
-  var url = "{% url 'user_books' 123 %}";
+  var url = "{% url 'user_books' 0 %}";
   selectElement = document.querySelector('#userselection');
   var id = selectElement.value;
-  window.open(url.replace('123', id), "_self");
+  window.open(url.replace('0', id), "_self");
 }
 </script>
 
@@ -108,10 +103,10 @@ function get_users_book() {
 
 <script>
 function get_author_book() {
-  var url = "{% url 'author_books' 123 %}";
+  var url = "{% url 'author_books' 0 %}";
   selectElement = document.querySelector('#authot_selection');
   var id = selectElement.value;
-  window.open(url.replace('123', id), "_self");
+  window.open(url.replace('0', id), "_self");
 }
 </script>
 
@@ -127,10 +122,10 @@ function get_author_book() {
 </p>
 <script>
 function Selection() {
-  var url = "{% url 'order-by-date' 444 %}";
+  var url = "{% url 'order-by-date' 0 %}";
   selectElement = document.querySelector('#selectt');
   var id = selectElement.value;
-  window.open(url.replace('444', id), "_self");
+  window.open(url.replace('0', id), "_self");
 }
 </script>
 
