@@ -1,5 +1,20 @@
 {% extends 'base.html' %}
 
 {% block context %}
-<h2>&emsp;Good day</h2>
+<style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+
+<h3>&emsp;<a href="{% url 'book_sort' 'id' %}">Books</a></h3>
+<br>
+<h3>&emsp;<a href="{% url 'base_author'%}">Autors</a></h3>
+<br>
+<h3>&emsp;<a>Orders</a></h3>
+<br>
+<h3>&emsp;<a href="{% url 'users' %}">Users</a></h3>
+<br>
+<h3>&emsp;<a href="{% url 'options' %}">Options</a></h3>
+</body>
 {% endblock %} 

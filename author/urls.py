@@ -18,5 +18,10 @@ from django.urls import path, include
 from author import views
 
 urlpatterns = [
-    path('authors_book/<int:id>/', views.author_books,  name = 'author_books'),
+    path('authors/', views.authors,  name = 'base_author'),
+    path('author_info/<int:id>/', views.add_author_info,  name = 'add_author_info'),
+    path('delete_author/<int:id>/', views.delete_author,  name = 'delete_author'),
+
 ]
+
+
