@@ -89,4 +89,4 @@ def add_info(request):
     except: 
         pass
     finally:    
-        return render(request, 'library/index.html')
+        return redirect('options')

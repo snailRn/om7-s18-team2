@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block context %}
+<style>
+table, tr, td {
+  border:1px solid black;
+}
+table{
+    margin: auto;
+}
+</style>
+{% if context %}
+<table style="width:90%" ><tr><td>Order ID</td><td>User ID</td><td>User name</td><td>User email</td>
+<td>Book ID</td><td>Book name</td><td>Author names</td><td>Created</td><td>Plated end</td><td>Closed at</td></tr>
+    {% for el in context %}
+<tr>
+<td>{{el.id}}</td><td>{{el.user.id}}</td>
+<td>{{el.user.first_name}} {{el.user.middle_name}} {{el.user.last_name}}</td>
+<td>{{el.user.email}}</td>
+<td>{{el.id}}</td>
+<td>{{el.book.name}}</td>
+<td>{%for author in el.book.authors.all%} {{author.surname}} {{author.name}} {{author.patronymic}};{% endfor %}</td>
+<td>{{el.created_at}}</td>
+<td>{{el.plated_end_at}}</td>
+<td>{{el.end_at}}</td>                
+</tr>{% endfor %}</table>
+{% else %}
+
+<h1> There is no order in library </h1>
+{% endif %}
+<br>
+<h7>&emsp;<button onclick="location.href='{% url 'add_order_info'%}'">Add new Order</button></h7></p>
+&emsp;<select id="order_selection">
+    {% for order in context %}
+    <option value="{{order.id}}" >Order №{{order.id}} </option>
+    {% endfor %}    
+    </select>
+
+
+    <button id="submit_order" onclick="get_order_info()"> Change Order info </button> 
+    
+    
+    <script>
+    function get_order_info() {
+        selectElement = document.querySelector('#order_selection');
+        var url = "{% url 'change_order_info' 0 %}";
+        var id = selectElement.value;
+        window.open(url.replace('0', id), "_self");
+    }
+    </script>
+
+
+<br>
+&emsp;<select id="order_not_closed">
+    {% for order1 in notclosed %}
+    <option value="{{order1.id}}" >Order №{{order1.id}}</option>
+    {% endfor %}
+    </select>
+
+    <button id="close_order" onclick="close_order()"> close Order </button>
+    
+    
+    <script>
+    function close_order() {
+        selectElement = document.querySelector('#order_not_closed');
+        var url = "{% url 'close_order' 0 %}";
+        var id = selectElement.value;
+        window.open(url.replace('0', id), "_self");
+    }
+
+    </script>
+
+
+
+
+{% endblock %}

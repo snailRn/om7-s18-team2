@@ -23,7 +23,6 @@ table, th, td {
 
     {% for el in context %}
 <tr>
-        <option value="" >
                 <td>{{el.user.id}}</td>
                 <td>{{el.user.first_name}} {{el.user.middle_name}} {{el.user.last_name}}</td>
                 <td>{{el.user.email}}</td>
@@ -37,7 +36,7 @@ table, th, td {
 
                 <td>{{el.created_at}}</td>
                 <td>{{el.plated_end_at}}</td>
-                 </option>
+
 </tr>
     {% endfor %}
 </table>
