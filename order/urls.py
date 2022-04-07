@@ -27,4 +27,5 @@ urlpatterns = [
     path('close-order/<int:id>', views.close_order,  name = 'close_order'),
     
     
+    
 ]
