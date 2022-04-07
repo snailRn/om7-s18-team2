@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block context %}
+<style>
+table, th, td {
+  border:1px solid black;
+  margin: auto;
+}
+</style>
+<h7>&emsp;<button onclick="location.href='{% url 'add_book' %}'">Add new Book</button></h7></p>
+{% if context %}
+<table style="width:90%">
+<tr>
+<td>Book ID</td>
+<td>Book name</td>
+<td>Book description</td>
+<td>Book count</td>
+<td>Author name</td>
+<td>Change</td> <td>Close</td>
+
+</tr>
+
+    {% for el in context %}
+<tr>
+
+                <td>{{el.id}}</td>
+                <td>{{el.name}}</td>
+                <td>{{el.description}}</td>
+                <td>{{el.count}}</td>
+                <td>{%for author in el.authors.all%}
+                {{author.surname}}
+                {{author.name}}
+                {{author.patronymic}}<p1>;</p1>
+                {% endfor %}</td> 
+                <td> <button id="submit_order" onclick="location.href='{% url 'change_book_info' el.id %}'"> Change Book info </button> </td> 
+                <td> 
+                <div><button id="submit_order" onclick="location.href='{% url 'delete_book' el.id %}'"> Delete Book </button></div></td>     
+</tr>
+
+    {% endfor %}
+</table>
+{% else %}
+<h1> There is no book in library </h1>
+{% endif %}
+{% endblock %}

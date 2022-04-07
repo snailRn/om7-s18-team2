@@ -4,6 +4,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from book.models import Book
 from order.models import Order
+from book.forms import BookForm
 
 def book_by_id(request, id=0):
     context = Book.objects.get(pk=id)
@@ -70,4 +71,40 @@ def filter_book(request):
                         Q(authors__patronymic__icontains = filter_opt.get('author')) )
     context = Book.objects.filter(filter_par).distinct()
     return render(request, 'book/all_book.html', {'title': title, 'content': content, 'context': context})
+
+def adm_books(request, sort='id'):
+    """
+    title - name of our page, which you can see in browser when mouse is pointed on web-site
+    content - name of selection type
+    """
+    context = Book.objects.all().order_by('id')
+    if sort == 'id':
+        title = 'sort by id'
+        content = 'admin books'
+
+    return render(request, 'book/adm_books.html', {'title': title, 'content': content, 'context': context})
+
+def add_book(request, id=0):
+    if request.method == 'GET':
+        if id == 0:
+            form = BookForm()
+        else:
+            order = Book.objects.get(pk=id)
+            form = BookForm(instance=order)        
+        return render(request, 'book/books_info.html', {'form': form})
+    else:
+        if id == 0:
+            form = BookForm(request.POST)
+        else:
+            order = Book.objects.get(pk=id)
+            form = BookForm(request.POST, instance=order)
+    if form.is_valid():
+        form.save()
+    return redirect('adm_books')
+    
+def delete_book(request, id=0):
+    user = Book.objects.get(pk=id)
+    if user:
+        user.delete()
+    return redirect('adm_books')
     

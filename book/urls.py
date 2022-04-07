@@ -22,5 +22,10 @@ urlpatterns = [
     path('all/<str:sort>/', views.all_book,  name = 'book_sort'),
     path('unordered/', views.unodered_books,  name = 'book_unodered'),
     path('filter/', views.filter_book, name='filter_book'),
+    path('adm_books/', views.adm_books, name='adm_books'),
+    path('add-book/', views.add_book,  name = 'add_book'),
+    path('change-book/<int:id>/', views.add_book,  name = 'change_book_info'),
+    path('delete_book/<int:id>/', views.delete_book,  name = 'delete_book'),
+    
     
 ]
