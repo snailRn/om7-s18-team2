@@ -16,6 +16,8 @@ class OrderForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(OrderForm, self).__init__(*args, **kwargs)
+        self.fields['user'].label_from_instance = lambda obj: f'{obj.id} {obj.first_name} {obj.last_name}'
+        self.fields['book'].label_from_instance = lambda obj: f'{obj.id} {obj.name}'
 
         
 
