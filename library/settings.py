@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 AUTH_USER_MODEL = 'authentication.CustomUser'
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,7 +43,7 @@ INSTALLED_APPS = [
     'author',
     'book',
     'order',
-    #'main',
+    'rest_framework',    
 ]
 
 MIDDLEWARE = [

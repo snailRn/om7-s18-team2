@@ -9,6 +9,36 @@ ROLE_CHOICES = (
     (1, 'admin'),
 )
 
+class UserManager(BaseUserManager):
+    def create_user(self, email, password=None):
+        """
+        Creates and saves a User with the given email and password.
+        """
+        if not email:
+            raise ValueError('Users must have an email address')
+
+        user = self.model(
+            email=self.normalize_email(email),
+        )
+
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password):
+        """
+        Creates and saves a superuser with the given email and password.
+        """
+        user = self.create_user(
+            email,
+            password=password,
+        )
+        user.role = 1
+        user.is_active = True
+        user.save(using=self._db)
+        return user
+
+
 
 class CustomUser(AbstractBaseUser):
     """
@@ -47,7 +77,7 @@ class CustomUser(AbstractBaseUser):
     is_active = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
-    objects = BaseUserManager()
+    objects = UserManager()
 
     def __str__(self):
         """
@@ -221,3 +251,23 @@ class CustomUser(AbstractBaseUser):
         returns str role name
         """
         return self.get_role_display()
+
+    def has_perm(self, perm, obj=None):
+        "Does the user have a specific permission?"
+        # Simplest possible answer: Yes, always
+        return bool(self.role)
+
+    def has_module_perms(self, app_label):
+        "Does the user have permissions to view the app `app_label`?"
+        # Simplest possible answer: Yes, always
+        return bool(self.role)
+    
+    @property
+    def is_staff(self):
+        "Is the user a member of staff?"
+        return bool(self.role)
+
+    @property
+    def is_admin(self):
+        "Is the user a admin member?"
+        return bool(self.role)
