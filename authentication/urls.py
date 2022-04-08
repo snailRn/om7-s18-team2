@@ -16,9 +16,12 @@ Including another URLconf
 
 from django.urls import path, include
 from authentication import views
+from rest_framework import routers
 
+# Routers provide an easy way of automatically determining the URL conf.
+ 
 urlpatterns = [
-    path('users/', views.users,  name = 'users'),  
+    path('all_users/', views.users,  name = 'all_users'),  
     path('user_info/<int:id>/', views.add_user_info,  name = 'add_user_info'),
     path('delete_user/<int:id>/', views.delete_user,  name = 'delete_user'),
     path('add-information/', views.add_info,  name = 'add_info'),
