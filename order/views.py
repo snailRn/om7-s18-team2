@@ -1,11 +1,12 @@
-from audioop import reverse
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from order.models import Order
 from order.forms import OrderForm 
 
 import datetime
-import pytz
+
+from rest_framework import viewsets, routers
+from order.serializers import OrderSerializer
+
 
 def not_on_time(request):
     """
@@ -79,9 +80,10 @@ def close_order(request, id=0):
     order.save()
     return redirect('all_orders')
 
+# ViewSets define the view behavior.
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
 
-
-    # plated_end_at = datetime.datetime.now(tz=pytz.utc) + datetime.timedelta(days=15)
-        #     &emsp; <label for="plated_end_at">plated_end_at:</label>
-        # {{form.plated_end_at}}<br>
-        # <br>
+router = routers.DefaultRouter()
+router.register(r'order', OrderViewSet)

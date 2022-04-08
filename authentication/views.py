@@ -6,13 +6,11 @@ from book.models import Book
 from order.models import Order
 from authentication.forms import CustomUserForm
 
-from rest_framework import viewsets
+from rest_framework import viewsets, routers
 from authentication.serializers import UserSerializer
 
 import datetime
 import pytz
-
-from rest_framework import routers
 
 
 def users(request):
@@ -103,4 +101,4 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
+router.register(r'user', UserViewSet)

@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from library import views
-import authentication
+from authentication import views as userviews
+from order import views as orderviews
 from rest_framework import routers
 
+router = routers.DefaultRouter()
+router.register(r'user', userviews.UserViewSet)
+router.register(r'order', orderviews.OrderViewSet)
 
 
 urlpatterns = [
@@ -31,7 +35,7 @@ urlpatterns = [
     path('options/',views.options, name='options'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     
-    path('api/v1/', include(authentication.views.router.urls)),
+    path('api/v1/', include(router.urls)),
 
 
 ]
