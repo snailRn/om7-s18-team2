@@ -14,9 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.urls import path, include
+from django.urls import path
 from authentication import views
-from rest_framework import routers
 
 # Routers provide an easy way of automatically determining the URL conf.
  
