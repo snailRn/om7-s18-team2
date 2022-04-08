@@ -6,8 +6,14 @@ from book.models import Book
 from order.models import Order
 from authentication.forms import CustomUserForm
 
+from rest_framework import viewsets
+from authentication.serializers import UserSerializer
+
 import datetime
 import pytz
+
+from rest_framework import routers
+
 
 def users(request):
     context = CustomUser.get_all()
@@ -90,3 +96,11 @@ def add_info(request):
         pass
     finally:    
         return redirect('options')
+
+# ViewSets define the view behavior.
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+
+router = routers.DefaultRouter()
+router.register(r'users', UserViewSet)
