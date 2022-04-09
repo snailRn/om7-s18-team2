@@ -6,6 +6,9 @@ from book.models import Book
 from order.models import Order
 from book.forms import BookForm
 
+from rest_framework import viewsets
+from book.serializers import BookSerializer
+
 def book_by_id(request, id=0):
     context = Book.objects.get(pk=id)
     title = 'Book by id'
@@ -107,4 +110,7 @@ def delete_book(request, id=0):
     if user:
         user.delete()
     return redirect('adm_books')
-    
+
+class BookViewSet(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
