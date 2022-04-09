@@ -3,9 +3,10 @@ from authentication.models import CustomUser
 from author.models import Author
 from book.models import Book
 
-from authentication.forms import CustomUserForm
 from author.forms import AuthorForm
 
+from rest_framework import viewsets
+from author.serializers import AuthorSerializer
 
 import datetime
 import pytz
@@ -54,3 +55,8 @@ def author_books(request, id=0):
     title = 'books'
     content = f'Selected all book by author id = {id}'
     return render(request, 'book/all_book.html', {'title': title, 'content': content, 'context': authors_book})
+
+
+class AuthorViewSet(viewsets.ModelViewSet):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
