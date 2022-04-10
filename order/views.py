@@ -6,6 +6,7 @@ import datetime
 
 from rest_framework import viewsets, routers
 from order.serializers import OrderSerializer
+from rest_framework.response import Response
 
 
 def not_on_time(request):
@@ -80,10 +81,28 @@ def close_order(request, id=0):
     order.save()
     return redirect('all_orders')
 
-# ViewSets define the view behavior.
-class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all()
+class OrderAllsViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
+    queryset = Order.objects.all()
 
-router = routers.DefaultRouter()
-router.register(r'order', OrderViewSet)
+
+# ViewSets define the view behavior.
+class OrderViewSet(viewsets.ViewSet):
+    serializer_class = OrderSerializer
+    queryset = Order.objects.all()
+
+    def list(self, request, user_pk=None):
+        queryset = self.queryset.filter(user=user_pk)
+        serializer_context = {
+            'request': request,
+        }
+        serializer = OrderSerializer(queryset, many=True, context=serializer_context)
+        return Response(serializer.data)
+
+    def retrieve(self, request, order_pk=None,user_pk=None):
+        queryset = self.queryset.get(pk=order_pk, user=user_pk)
+        serializer_context = {
+            'request': request,
+        }
+        serializer = OrderSerializer(queryset, context=serializer_context)
+        return Response(serializer.data)

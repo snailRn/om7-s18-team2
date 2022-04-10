@@ -5,9 +5,12 @@ from author.models import Author
 from book.models import Book
 from order.models import Order
 from authentication.forms import CustomUserForm
-
-from rest_framework import viewsets, routers
 from authentication.serializers import UserSerializer
+
+from rest_framework import viewsets
+from rest_framework.decorators import action
+from order.serializers import OrderSerializer 
+
 
 import datetime
 import pytz
@@ -95,10 +98,7 @@ def add_info(request):
     finally:    
         return redirect('options')
 
-# ViewSets define the view behavior.
 class UserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
 
-router = routers.DefaultRouter()
-router.register(r'user', UserViewSet)
