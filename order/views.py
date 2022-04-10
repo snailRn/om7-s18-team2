@@ -7,6 +7,7 @@ import datetime
 from rest_framework import viewsets, routers
 from order.serializers import OrderSerializer
 from rest_framework.response import Response
+from rest_framework import status
 
 
 def not_on_time(request):
@@ -92,7 +93,12 @@ class OrderViewSet(viewsets.ViewSet):
     queryset = Order.objects.all()
 
     def list(self, request, user_pk=None):
-        queryset = self.queryset.filter(user=user_pk)
+        try:
+            queryset = self.queryset.filter(user=user_pk)
+            if not queryset: return Response(status=status.HTTP_404_NOT_FOUND)
+            
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
         serializer_context = {
             'request': request,
         }
@@ -100,7 +106,10 @@ class OrderViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     def retrieve(self, request, order_pk=None,user_pk=None):
-        queryset = self.queryset.get(pk=order_pk, user=user_pk)
+        try:
+            queryset = self.queryset.get(pk=order_pk, user=user_pk)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
         serializer_context = {
             'request': request,
         }
