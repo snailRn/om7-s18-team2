@@ -5,4 +5,4 @@ from rest_framework import serializers
 class OrderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Order
-        fields = ['id', 'user', 'created_at','end_at', 'plated_end_at']
+        fields = ['id', 'url', 'user', 'created_at','end_at', 'plated_end_at']
